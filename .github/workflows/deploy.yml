@@ -1,8 +1,42 @@
+# name: Deploy to GitHub Pages
+
+# on:
+#   push:
+#     branches: [ "main" ]  # Set this to your default branch
+#   pull_request:
+#     branches: [ "main" ]
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - uses: actions/checkout@v3
+      
+#       # Set up Flutter
+#       - uses: subosito/flutter-action@v2
+#         with:
+#           flutter-version: '3.16.0'  # Specify your Flutter version
+#           channel: 'stable'
+          
+#       # Get dependencies and build
+#       - run: flutter pub get
+#       - run: flutter build web --release --base-href "/githubpages/"  # Replace with your repo name
+        
+#       # # Deploy to GitHub Pages
+#       # - uses: peaceiris/actions-gh-pages@v3
+#       #   if: github.ref == 'refs/heads/main'  # Only deploy when pushing to main
+#       #   with:
+#       #     github_token: ${{ secrets.GITHUB_TOKEN }}
+#       #     publish_dir: ./build/web
+#       #     force_orphan: true  # Keep only the latest version of the site
+
+
 name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ "main" ]  # Set this to your default branch
+    branches: [ "main" ]  # Triggers on push to main branch
   pull_request:
     branches: [ "main" ]
 
@@ -11,22 +45,34 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4  # Updated to v4 for better performance
       
       # Set up Flutter
-      - uses: subosito/flutter-action@v2
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.16.0'  # Specify your Flutter version
+          flutter-version: '3.19.0'  # Updated to support your SDK requirement
           channel: 'stable'
-          
-      # Get dependencies and build
-      - run: flutter pub get
-      - run: flutter build web --release --base-href "/githubpages/"  # Replace with your repo name
+      
+      # Enable web support
+      - name: Enable Flutter web
+        run: flutter config --enable-web
         
-      # # Deploy to GitHub Pages
-      # - uses: peaceiris/actions-gh-pages@v3
-      #   if: github.ref == 'refs/heads/main'  # Only deploy when pushing to main
-      #   with:
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      #     publish_dir: ./build/web
-      #     force_orphan: true  # Keep only the latest version of the site
+      # Get dependencies and build web
+      - name: Install dependencies
+        run: flutter pub get
+        
+      - name: Build Flutter web
+        run: flutter build web --release --base-href "/githubpages/"  # Replace 'githubpages' with your repo name
+        
+      # Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/main'  # Only deploy when pushing to main
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build/web
+          force_orphan: true  # Keep only the latest version of the site
+
+permissions:
+  contents: write  # Required for pushing to gh-pages branch
