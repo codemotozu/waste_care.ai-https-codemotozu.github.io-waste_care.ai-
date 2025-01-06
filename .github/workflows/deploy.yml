@@ -47,64 +47,11 @@
 
 
 
-# name: Deploy to GitHub Pages
-
-# on:
-#   push:
-#     branches: [ "main" ]  # Triggers on push to main branch
-#   pull_request:
-#     branches: [ "main" ]
-
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
-
-#     steps:
-#       - uses: actions/checkout@v4  # Updated to v4 for better performance
-      
-#       # Set up Flutter
-#       - name: Set up Flutter
-#         uses: subosito/flutter-action@v2
-#         with:
-#           flutter-version: '3.27.1'  # Updated to support your SDK requirement
-#           channel: 'stable'
-      
-#       # Enable web support
-#       - name: Enable Flutter web
-#         run: flutter config --enable-web
-        
-#       # Get dependencies and build web
-#       - name: Install dependencies
-#         run: flutter pub get
-        
-#       - name: Build Flutter web
-#         run: flutter build web --release --base-href "/waste_sense.ai/"  # Replace 'githubpages' with your repo name
-        
-#       # Deploy to GitHub Pages
-#       - name: Deploy to GitHub Pages
-#         uses: peaceiris/actions-gh-pages@v3
-#         if: github.ref == 'refs/heads/main'  # Only deploy when pushing to main
-#         with:
-#           github_token: ${{ secrets.GITHUB_TOKEN }}
-#           publish_dir: ./build/web
-#           force_orphan: true  # Keep only the latest version of the site
-
-# permissions:
-#   contents: write  # Required for pushing to gh-pages branch
-
-
-
-
-
-
-
-
-
 name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main" ]  # Triggers on push to main branch
   pull_request:
     branches: [ "main" ]
 
@@ -113,35 +60,39 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4  # Updated to v4 for better performance
       
+      # Set up Flutter
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.27.1'
+          flutter-version: '3.27.1'  # Updated to support your SDK requirement
           channel: 'stable'
-          
+      
+      # Enable web support
       - name: Enable Flutter web
         run: flutter config --enable-web
         
+      # Get dependencies and build web
       - name: Install dependencies
-        working-directory: ./githubpages
-        run: |
-          flutter doctor -v
-          flutter clean
-          flutter pub get
+        run: flutter pub get
         
       - name: Build Flutter web
-        working-directory: ./githubpages
-        run: flutter build web --release --base-href "/waste_sense.ai/"
+        run: flutter build web --release --base-href "/githubpages/"  # Replace 'githubpages' with your repo name
         
+      # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main'  # Only deploy when pushing to main
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./githubpages/build/web
-          force_orphan: true
+          publish_dir: ./build/web
+          force_orphan: true  # Keep only the latest version of the site
 
 permissions:
-  contents: write
+  contents: write  # Required for pushing to gh-pages branch
+
+
+
+
+
