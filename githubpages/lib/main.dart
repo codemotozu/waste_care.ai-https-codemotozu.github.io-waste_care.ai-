@@ -113,7 +113,7 @@ class HeroSection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'WasteSenseAI TEST',
+              'WasteSenseAI  TEST',
               style: GoogleFonts.inter(
                 fontSize: 64,
                 fontWeight: FontWeight.bold,
