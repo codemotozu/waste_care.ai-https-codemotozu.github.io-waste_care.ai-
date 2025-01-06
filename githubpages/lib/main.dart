@@ -16,7 +16,7 @@ class WasteSenseApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'WasteSenseAI',
+      title: 'WasteCareAI',
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
@@ -113,7 +113,7 @@ class HeroSection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'WasteSenseAI',
+              'WasteCareAI',
               style: GoogleFonts.inter(
                 fontSize: 64,
                 fontWeight: FontWeight.bold,
@@ -452,7 +452,7 @@ class VideoShowcaseSection extends StatelessWidget {
           ),
           const SizedBox(height: 24),
           Text(
-            'Watch how WasteSenseAI identifies and classifies waste in real-time',
+            'Watch how WasteCareAI identifies and classifies waste in real-time',
             style: GoogleFonts.inter(
               fontSize: 20,
               color: Colors.grey[600],
@@ -1483,7 +1483,7 @@ class FooterSection extends StatelessWidget {
       color: Colors.black,
       child: Center(
         child: Text(
-          '© 2025 WasteSenseAI. All rights reserved.',
+          '© 2025 WasteCareAI. All rights reserved.',
           style: GoogleFonts.inter(
             color: Colors.white70,
           ),
