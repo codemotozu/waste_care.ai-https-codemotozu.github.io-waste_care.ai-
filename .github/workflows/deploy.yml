@@ -100,8 +100,6 @@
 
 
 
-
-
 name: Deploy to GitHub Pages
 
 on:
@@ -127,14 +125,14 @@ jobs:
         run: flutter config --enable-web
         
       - name: Install dependencies
-        working-directory: .
+        working-directory: ./githubpages
         run: |
           flutter doctor -v
           flutter clean
           flutter pub get
         
       - name: Build Flutter web
-        working-directory: .
+        working-directory: ./githubpages
         run: flutter build web --release --base-href "/waste_sense.ai/"
         
       - name: Deploy to GitHub Pages
@@ -142,7 +140,7 @@ jobs:
         if: github.ref == 'refs/heads/main'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build/web
+          publish_dir: ./githubpages/build/web
           force_orphan: true
 
 permissions:
