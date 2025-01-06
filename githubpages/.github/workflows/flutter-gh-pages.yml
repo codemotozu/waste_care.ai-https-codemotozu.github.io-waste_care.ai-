@@ -13,16 +13,31 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
-      # Set up Flutter
-      - uses: subosito/flutter-action@v2
+    # Set up Flutter
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.16.0'  # Specify your Flutter version
+          flutter-version: '3.x'
           channel: 'stable'
-          
-      # Get dependencies and build
-      - run: flutter pub get
-      - run: flutter build web --release --base-href "/waste_sense_for_cv/"  # Replace with your repo name
+
+      # Navigate to Flutter project directory and get dependencies
+      - name: Get dependencies
+        working-directory: ./githubpages
+        run: flutter pub get
+
         
+      
+      # Build Flutter web in the correct directory
+      - name: Build Flutter web
+        working-directory: ./githubpages
+        run: flutter build web
+      
+      # Copy build files to parent directory (root)
+      - name: Copy build files to root
+        run: |
+          cp -r githubpages/build/web/* ./
+          rm -rf githubpages/build
+       
       # Deploy to GitHub Pages
       - uses: peaceiris/actions-gh-pages@v3
         if: github.ref == 'refs/heads/main'  # Only deploy when pushing to main
