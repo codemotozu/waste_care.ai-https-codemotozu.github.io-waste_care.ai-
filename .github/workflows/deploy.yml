@@ -23,10 +23,10 @@ jobs:
       - run: flutter pub get
       - run: flutter build web --release --base-href "/githubpages/"  # Replace with your repo name
         
-      # Deploy to GitHub Pages
-      - uses: peaceiris/actions-gh-pages@v3
-        if: github.ref == 'refs/heads/main'  # Only deploy when pushing to main
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build/web
-          force_orphan: true  # Keep only the latest version of the site
+      # # Deploy to GitHub Pages
+      # - uses: peaceiris/actions-gh-pages@v3
+      #   if: github.ref == 'refs/heads/main'  # Only deploy when pushing to main
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     publish_dir: ./build/web
+      #     force_orphan: true  # Keep only the latest version of the site
