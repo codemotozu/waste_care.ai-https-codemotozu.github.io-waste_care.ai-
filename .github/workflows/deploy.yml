@@ -63,7 +63,7 @@ jobs:
         run: flutter pub get
         
       - name: Build Flutter web
-        run: flutter build web --release --base-href "/githubpages/"  # Replace 'githubpages' with your repo name
+        run: flutter build web --release --base-href "/waste_sense.ai/"  # Replace 'githubpages' with your repo name
         
       # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
