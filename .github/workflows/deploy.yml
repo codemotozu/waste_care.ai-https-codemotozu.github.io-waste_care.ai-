@@ -71,7 +71,7 @@ jobs:
       
       - run: flutter config --enable-web
       - run: flutter pub get
-      - run: flutter build web --release --base-href "/githubpages/"
+      - run: flutter build web --release --base-href "/waste_sense.ai/"
         
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
