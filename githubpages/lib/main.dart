@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        controller: _scrollController, // Add the scroll controller here
+        controller: _scrollController, // Add the scroll controller here.
         child: Column(
           children: [
             HeroSection(onLearnMorePressed: _scrollToFeatures),
