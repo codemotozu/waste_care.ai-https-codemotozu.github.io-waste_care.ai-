@@ -122,7 +122,7 @@ class HeroSection extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             Text(
-              'Revolutionizing waste sorting with AI and robotics.',
+              'Revolutionizing waste sorting with AI and robotics',
               style: GoogleFonts.inter(
                 fontSize: 24,
                 color: Colors.white,
